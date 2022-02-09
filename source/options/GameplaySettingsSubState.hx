@@ -69,7 +69,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'inputSystem',
 			'string',
 			"Native",
-			["Native", "Kade Engine", "ZoroForce EK"]);
+			["Native", "Kade Engine"]);
 		addOption(option);
 
 		var option:Option = new Option('Disable Reset Button',
