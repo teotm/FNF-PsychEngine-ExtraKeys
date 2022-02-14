@@ -116,16 +116,9 @@ class CoolUtil
 
 	//uhhhh does this even work at all? i'm starting to doubt
 	public static function precacheSound(sound:String, ?library:String = null):Void {
-		precacheSoundFile(Paths.sound(sound, library));
-	}
-
-	public static function precacheMusic(sound:String, ?library:String = null):Void {
-		precacheSoundFile(Paths.music(sound, library));
-	}
-
-	private static function precacheSoundFile(file:Dynamic):Void {
-		if (Assets.exists(file, SOUND) || Assets.exists(file, MUSIC))
-			Assets.getSound(file, true);
+		if(!Assets.cache.hasSound(Paths.sound(sound, library))) {
+			FlxG.sound.cache(Paths.sound(sound, library));
+		}
 	}
 
 	public static function browserLoad(site:String) {
@@ -135,9 +128,4 @@ class CoolUtil
 		FlxG.openURL(site);
 		#end
 	}
-
-	public static function camLerpShit(daLerp:Float)
-		{
-		  	return (FlxG.elapsed / 0.016666666666666666) * daLerp;
-		}
 }

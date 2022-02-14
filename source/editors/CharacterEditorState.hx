@@ -3,7 +3,6 @@ package editors;
 #if desktop
 import Discord.DiscordClient;
 #end
-import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -148,7 +147,7 @@ class CharacterEditorState extends MusicBeatState
 			\nW/S - Previous/Next Animation
 			\nSpace - Play Animation
 			\nArrow Keys - Move Character Offset
-			\nR - Reset Current Offset
+			\nZ - Reset Current Offset
 			\nHold Shift to Move 10x faster\n", 12);
 		tipText.cameras = [camHUD];
 		tipText.setFormat(null, 12, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -782,10 +781,6 @@ class CharacterEditorState extends MusicBeatState
 				char.x = char.positionArray[0] + OFFSET_X + 100;
 				updatePointerPos();
 			}
-			else if(sender == singDurationStepper)
-			{
-				char.singDuration = singDurationStepper.value;//ermm you forgot this??
-			}
 			else if(sender == positionYStepper)
 			{
 				char.positionArray[1] = positionYStepper.value;
@@ -825,21 +820,14 @@ class CharacterEditorState extends MusicBeatState
 		if(char.animation.curAnim != null) {
 			lastAnim = char.animation.curAnim.name;
 		}
+
 		var anims:Array<AnimArray> = char.animationsArray.copy();
-		if(Paths.fileExists('images/' + char.imageFile + '/Animation.json', TEXT)) {
-			char.frames = AtlasFrameMaker.construct(char.imageFile);
-		} else if(Paths.fileExists('images/' + char.imageFile + '.txt', TEXT)) {
+		if(Paths.fileExists('images/' + char.imageFile + '.txt', TEXT)) {
 			char.frames = Paths.getPackerAtlas(char.imageFile);
 		} else {
 			char.frames = Paths.getSparrowAtlas(char.imageFile);
 		}
 
-		
-		
-		
-		
-		
-		
 		if(char.animationsArray != null && char.animationsArray.length > 0) {
 			for (anim in char.animationsArray) {
 				var animAnim:String = '' + anim.anim;
